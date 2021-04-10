@@ -1,11 +1,10 @@
 class TicTacToe:
     def __init__(self):
-        self.board = [ ' ' for _ in range(9)]
+        self.board = self.make_board()
         self.current_winner = None # keep track of winner
     
     def print_board(self):
-        for row in [self.board[i*3:(i+1)*3] for i in range(3)] :
-            #print(row)
+        for row in [self.board[i*3:(i+1) * 3] for i in range(3)]:
             print('| ' + ' | '.join(row) + ' |')
     
     @staticmethod
@@ -13,15 +12,16 @@ class TicTacToe:
         number_board = [[str(i) for i in range(j*3, (j+1)*3)] for j in range(3)]
         for row in number_board:
             print('| ' + ' | '.join(row) + ' |')
+    
+    @staticmethod
+    def make_board():
+        return [' ' for _ in range(9)]
         
     def available_moves(self):
-        moves = []
-        for (index , val) in enumerate(self.board):
-            if val == ' ':
-                moves.append(index) 
-        return moves
-        #list comprehension
-        #return [i for i, val in enumerate(self.board) if spot == ' ']
+        avail_moves =  [i for i, x in enumerate(self.board) if x == " "]
+        print('available move:')
+        print(avail_moves)
+        return avail_moves
     
     def has_empty_square(self):
         return ' ' in self.board
@@ -45,14 +45,21 @@ class TicTacToe:
         if all([spot == letter for spot in col]):
             return True
 
-        #check diag
-        
-
+        #check diagonals
+        #first check for even number (0,2,4,6,8)
+        if square % 2 == 0:
+            diag1 = [self.board[i] for i in [0,4,8]]
+            if all([spot == letter for spot in diag1]):
+                return True
+            diag2 = [self.board[i] for i in [2,4,6]]
+            if all([spot == letter for spot in diag2]):
+                return True
         return False
 
     def make_move(self, square, letter):
-        if self.board[square] == ' ':
-            self.board[square] == letter
+        if self.board[square] == " ":
+            print(f'{letter} make move to {square}')
+            self.board[square] = letter
             #check winner
             if self.check_winner(square, letter):
                 self.current_winner = letter
@@ -64,18 +71,18 @@ def play(game, x_player, o_player, print_game = True):
     if print_game:
         game.print_board_nums()
     
-    letter = 'X'
+    letter = x_player.letter
     #iterate while the board still has empty square
     while game.has_empty_square():
         #get the move from player
-        if letter == 'O':
+        if letter == o_player.letter:
             square = o_player.get_move(game)
         else:
             square = x_player.get_move(game)
         
         if game.make_move(square, letter):
             if print_game:
-                print(letter + f'made a move to square {square}')
+                print(letter + f' made a move to square {square}')
                 game.print_board()
                 print('')
             
@@ -86,7 +93,7 @@ def play(game, x_player, o_player, print_game = True):
                 return letter
             
             #switch player
-            letter = 'O' if letter == 'X' else 'X'
+            letter = o_player.letter if letter == x_player.letter else x_player.letter
     
     if print_game:
         print('It is a tie!')
