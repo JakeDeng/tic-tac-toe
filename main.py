@@ -1,11 +1,11 @@
 from game import TicTacToe, play
-from player import RandomComputerPlayer, HumanPlayer
+from player import RandomComputerPlayer, HumanPlayer, AIPlayer
 
 #main process
 if __name__ == "__main__":
     #create player and game
-    x_player = HumanPlayer('K')
-    o_player = RandomComputerPlayer('O')
+    x_player = AIPlayer('X')
+    o_player = HumanPlayer('O')
     new_game = TicTacToe()
 
     #play

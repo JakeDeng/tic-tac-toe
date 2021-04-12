@@ -80,6 +80,7 @@ def play(game, x_player, o_player, print_game = True):
         else:
             square = x_player.get_move(game)
         
+        #player makes a move
         if game.make_move(square, letter):
             if print_game:
                 print(letter + f' made a move to square {square}')
@@ -94,6 +95,10 @@ def play(game, x_player, o_player, print_game = True):
             
             #switch player
             letter = o_player.letter if letter == x_player.letter else x_player.letter
+        
+        #delay
+        import time
+        time.sleep(0.8)
     
     if print_game:
         print('It is a tie!')
