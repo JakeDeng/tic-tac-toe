@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Tic Tac Toe</h1>
+    <br>
+    <!-- For loop logic of jinja template -->
+    <div class="board">
+        {%for row in range(3)%}
+            <div class="row">
+                {%for cell in range(3)%}
+                    <div class="cell" id=cell-{{row*3 +cell}} onclick="handleClick({{ row*3 +cell}})">{{ row*3 +cell }}</div>
+                {%endfor%}
+            </div>
+        {%endfor%}
+    </div>
+
+    <script>
+        function handleClick(index){
+            console.log(`cell ${index} clicked`);
+            //ajax request 
+            $.post('/move', {square : index});
+        }
+        
+
+    </script>
+
+{% endblock content %}

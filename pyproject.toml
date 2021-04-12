@@ -6,7 +6,7 @@ authors = ["JAKEDENG1 <<>>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-player = "^0.6.1"
+Flask = "^1.1.2"
 
 [tool.poetry.dev-dependencies]
 

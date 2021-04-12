@@ -19,8 +19,8 @@ class TicTacToe:
         
     def available_moves(self):
         avail_moves =  [i for i, x in enumerate(self.board) if x == " "]
-        print('available move:')
-        print(avail_moves)
+        #print('available move:')
+        #print(avail_moves)
         return avail_moves
     
     def has_empty_square(self):
@@ -58,7 +58,7 @@ class TicTacToe:
 
     def make_move(self, square, letter):
         if self.board[square] == " ":
-            print(f'{letter} make move to {square}')
+            #print(f'{letter} make move to {square}')
             self.board[square] = letter
             #check winner
             if self.check_winner(square, letter):
@@ -70,6 +70,7 @@ class TicTacToe:
 def play(game, x_player, o_player, print_game = True):
     if print_game:
         game.print_board_nums()
+        print('')
     
     letter = x_player.letter
     #iterate while the board still has empty square
@@ -83,7 +84,7 @@ def play(game, x_player, o_player, print_game = True):
         #player makes a move
         if game.make_move(square, letter):
             if print_game:
-                print(letter + f' made a move to square {square}')
+                #print(letter + f' made a move to square {square}')
                 game.print_board()
                 print('')
             
